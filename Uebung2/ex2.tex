@@ -1,0 +1,27 @@
+\section*{2. Übung}
+\subsection*{Aufgabe 2.1}
+Gegeben sei die Turingmaschine $M=(\{q_1, q_2, q_3\}, \{0,1\}, \{0,1,B\}, B, q_1, q_2, \delta)$ mit $\delta$ wie folgt:
+\begin{center}
+	\begin{tabular}{l|lll}
+		$\delta$ & \hspace{0.6cm}0 & \hspace{0.6cm}1 & \hspace{0.6cm}B \\ \hline
+		$q_1$ & ($q_3$, 1, N) & ($q_1$, 0, R) & ($q_2$, B, L) \\
+		$q_3$ & ($q_1$, 0, L) & ($q_3$, 1, L) & ($q_1$, B, R)
+	\end{tabular}\\
+\end{center}
+Berechnen Sie die Gödelnummer $\langle M \rangle$ von $M$ wie in der Vorlesung definiert.
+
+\subsection*{Aufgabe 2.2}
+Sei $M = (Q, \Sigma, \Gamma, B, q_0, \bar{q}, \delta)$ eine 1-Band-TM, deren Speicherbedarf für eine Eingabe der Länge $n$ maximal $s(n)$ beträgt. Zeigen Sie: Wenn $M$ auf einer Eingabe $w$ der Länge $n$ hält, dann hält $M$ auf $w$ nach spätestenz $(\left| Q\right| -1) \cdot \left| \Gamma\right|^{s(n)} \cdot s(n)+1$ Schritten.\\\\
+
+In den folgenden Aufgaben ist es \textbf{nicht} notwendig, die Turingmaschinen explizit anzugeben. Eine Beschreibung ihrer Arbeitsweise und Laufzeit in den einzelnen Arbeitsschritten genügt.
+
+\subsection*{Aufgabe 2.3}
+Sei $L=\{w\#w \mid w \in \{0,1\}^*\}$ (über dem Alphabet $\Sigma = \{0,1,\#\})$.\\
+a) Beschreiben Sie eine möglichst effiziente 1-Band-TM, die $L$ entscheidet. Analysieren Sie den Zeit- und Speicherbedarf der von ihnen entworfenen Maschine.\\\\
+
+b) Beschreiben Sie eine möglichst effiziente 2-Band-TM, die $L$ entscheidet. Analysieren Sie den Zeit- und Speicherbedarf der von ihnen entworfenen Maschine.\\\\
+
+\textbf{Hinweis:} Überlegen Sie sich zuerst, wie wie ein zweites Band die Erkennung eines Wortes in $L$ schneller malchen kann.
+
+\subsection*{Aufgabe 2.4}
+Zeigen Sie, dass jede 1-Band-TM durch eine 1-Band-TM mit einseitig unendlichem Band, d.h., durch eine Turingmaschine, die die Position $p < 0$ nie benutzt, simuliert werden kann. Wie groß ist der Zeitverlust?
