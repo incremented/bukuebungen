@@ -9,9 +9,42 @@ Gegeben sei die Turingmaschine $M=(\{q_1, q_2, q_3\}, \{0,1\}, \{0,1,B\}, B, q_1
 	\end{tabular}\\
 \end{center}
 Berechnen Sie die Gödelnummer $\langle M \rangle$ von $M$ wie in der Vorlesung definiert.
+\\
+
+$\langle M \rangle = $ code(1) 11 code(2) 11 code(3) 11 code(4) 11 code(5) 11 code(6) 111
+\\
+
+Mit:
+\\
+$\delta$($q_{1}$, 0): code(1) = 0101000100100
+\\
+$\delta$($q_{1}$, 1): code(2) = 010010101000
+\\
+$\delta$($q_{1}$, B): code(3) = 01000100100010
+\\
+$\delta$($q_{3}$, 0): code(4) = 00010101010
+\\
+$\delta$($q_{3}$, 1): code(5) = 000100100010010
+\\
+$\delta$($q_{3}$, B): code(6) = 00010001010001000
+\\
+
 
 \subsection*{Aufgabe 2.2}
 Sei $M = (Q, \Sigma, \Gamma, B, q_0, \bar{q}, \delta)$ eine 1-Band-TM, deren Speicherbedarf für eine Eingabe der Länge $n$ maximal $s(n)$ beträgt. Zeigen Sie: Wenn $M$ auf einer Eingabe $w$ der Länge $n$ hält, dann hält $M$ auf $w$ nach spätestenz $(\left| Q\right| -1) \cdot \left| \Gamma\right|^{s(n)} \cdot s(n)+1$ Schritten.\\\\
+
+Der Term $(\left| Q\right| -1) \cdot \left| \Gamma\right|^{s(n)} \cdot s(n)$ beschreibt die Anzahl aller möglichen Konfigurationen
+die eine TM erreichen kann für $|Q| - 1$ Zustände. Da wir 
+annehmen, dass die TM auf der Eingabe hält, erreicht sie nach 
+einer endlichen Anzahl von Schritten auch ihren Endzustand
+welcher in dem obigen Term nicht berücksitigt wurde. Da jede
+Konfiguration genau einem Schritt der TM entspricht heisst dies
+aber auch, dass nach $(\left| Q\right| -1) \cdot \left| \Gamma\right|^{s(n)} \cdot s(n)$ vielen Schritten nur noch ein Schritt
+maximal übrig ist um in den Endzustand zu gelangen (Unter der
+Annahme, dass die TM hält). Deswegen beschreibt 
+$(\left| Q\right| -1) \cdot \left| \Gamma\right|^{s(n)} \cdot s(n)+1$ die maximale Anzahl von Schritten nach denen die TM terminiert.
+\\\\
+
 
 In den folgenden Aufgaben ist es \textbf{nicht} notwendig, die Turingmaschinen explizit anzugeben. Eine Beschreibung ihrer Arbeitsweise und Laufzeit in den einzelnen Arbeitsschritten genügt.
 
@@ -33,6 +66,8 @@ Für Länge($w$) $= n$ werden für jedes Zeichen von $w$ $n+1$ Schritte getan bi
 Insgesamt braucht die TM also $n*(2n+1)+n+1$ Schritte, die Laufzeit ist also $O(n^2)$.\\
 Es werden alle Elemente von $w$ besucht, sowie das ursprüngliche $\#$ Zeichen, die $n$ Zeichen hinter $\#$ und gegebenenfalls noch ein B am Ende.\\
 Zusammen also $2n+2$ Zellen.\\\\
+
+\newpage
 
 b) Beschreiben Sie eine möglichst effiziente 2-Band-TM, die $L$ entscheidet. Analysieren Sie den Zeit- und Speicherbedarf der von ihnen entworfenen Maschine.\\
 \textbf{Hinweis:} Überlegen Sie sich zuerst, wie wie ein zweites Band die Erkennung eines Wortes in $L$ schneller machen kann.
