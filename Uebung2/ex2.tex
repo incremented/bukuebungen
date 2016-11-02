@@ -17,11 +17,50 @@ In den folgenden Aufgaben ist es \textbf{nicht} notwendig, die Turingmaschinen e
 
 \subsection*{Aufgabe 2.3}
 Sei $L=\{w\#w \mid w \in \{0,1\}^*\}$ (über dem Alphabet $\Sigma = \{0,1,\#\})$.\\
-a) Beschreiben Sie eine möglichst effiziente 1-Band-TM, die $L$ entscheidet. Analysieren Sie den Zeit- und Speicherbedarf der von ihnen entworfenen Maschine.\\\\
+a) Beschreiben Sie eine möglichst effiziente 1-Band-TM, die $L$ entscheidet. Analysieren Sie den Zeit- und Speicherbedarf der von ihnen entworfenen Maschine.\\
 
-b) Beschreiben Sie eine möglichst effiziente 2-Band-TM, die $L$ entscheidet. Analysieren Sie den Zeit- und Speicherbedarf der von ihnen entworfenen Maschine.\\\\
+\begin{enumerate}
+\item Die TM 'merkt' sich erste Zeichen und setzt dieses auf B. Ist das Zeichen ein B wird mit 0 terminiert, bei $\#$ wird zu 7. gesprungen.
+\item Für 0 und 1 wird jeweils in einen eigenen Zustand gewechselt, die aber beide nach Rechts gehen, bis sie ein $\#$ lesen.
+\item Die beiden Zustände wechseln jeweils in einen neuen Zustand, welcher nach rechts läuft, bis ein Zeichen ungleich $\#$ gelesen wird.
+\item Dieses neue Zeichen wird mit dem gemerkten Zeichen verglichen. Sind sie nicht gleich wird mit 0 terminiert. Sind sie gleich, so wird das Zeichen auf $\#$ gesetzt.
+\item Es wird nach links gelaufen bis das erste Zeichen (ungleich B) gelesen wird.
+\item Ist das erste Zeichen nicht $\#$, wird zu 1. gesprungen.
+\item Es wird nach rechts gegangen bis ein B gelesen wird. Wird dabei eine 0 oder 1 gelesen wird mit 0 terminiert. Wird ein B gelesen wird mit 1 terminiert.
+\end{enumerate}
+Falls die TM terminiert:\\
+Für Länge($w$) $= n$ werden für jedes Zeichen von $w$ $n+1$ Schritte getan bis der Lesekopf auf dem Zeichen steht, mit welchem verglichen wird und anschließend muss der Lesekopf $n$ Schritte an den Anfang zurückgehen. Am Ende läuft die TM noch einmal $n+1$ Schritte über die $\#$ Zeichen und ein letztes B.\\
+Insgesamt braucht die TM also $n*(2n+1)+n+1$ Schritte, die Laufzeit ist also $O(n^2)$.\\
+Es werden alle Elemente von $w$ besucht, sowie das ursprüngliche $\#$ Zeichen, die $n$ Zeichen hinter $\#$ und gegebenenfalls noch ein B am Ende.\\
+Zusammen also $2n+2$ Zellen.\\\\
 
-\textbf{Hinweis:} Überlegen Sie sich zuerst, wie wie ein zweites Band die Erkennung eines Wortes in $L$ schneller malchen kann.
+b) Beschreiben Sie eine möglichst effiziente 2-Band-TM, die $L$ entscheidet. Analysieren Sie den Zeit- und Speicherbedarf der von ihnen entworfenen Maschine.\\
+\textbf{Hinweis:} Überlegen Sie sich zuerst, wie wie ein zweites Band die Erkennung eines Wortes in $L$ schneller machen kann.
+
+\begin{enumerate}
+	\item Das leere Wort terminiert mit 0. Beide Bände laufen nach Rechts bis auf Band 1 ein $\#$ gelesen wird. Dabei wird jedes Zeichen, welches auf Band 1 gelesen wird, auf Band 2 kopiert und anschließend gelöscht.
+	\item Wird ein $\#$ gelesen löscht Band 1 dieses und geht einen Schritt nach Rechts.
+	Band 2 geht nun an den Anfang zurück.
+	\item Nun laufen beide Bänder nach Rechts und vergleichen die gelesenen Zeichen. Werden unterschiedliche Zeichen gelesen wird mit 0 terminiert.
+	\item Lesen beide Bänder ein B wird mit 1 terminiert.
+\end{enumerate}
+Für Länge($w$) $=n$ läuft die TM zunächst mit beiden Bändern die $n$ Zeichen ab. Anschließend wird der Lesekopf auf Band 2 mit $n$ Schritten auf den Anfang zurückgesetzt. Am Ende werden erneut $n$ Schritte benötigt um die beiden Bänder zu vergleichen.\\
+Das macht zusammen $3n$ Schritte, die Laufzeit beträgt also $O(n)$.\\
+Band 1 wird einmal gesamt durchlaufen, was 2n+1 Zellen sind. Auf Band 2 werden nur die n Elemente von einem $w$ kopiert, welche auch vollständig durchlaufen werden.\\
+Das macht einen Speicherverbrauch von 3n+1 Zellen.\\\\
+
+
 
 \subsection*{Aufgabe 2.4}
-Zeigen Sie, dass jede 1-Band-TM durch eine 1-Band-TM mit einseitig unendlichem Band, d.h., durch eine Turingmaschine, die die Position $p < 0$ nie benutzt, simuliert werden kann. Wie groß ist der Zeitverlust?
+Zeigen Sie, dass jede 1-Band-TM durch eine 1-Band-TM mit einseitig unendlichem Band, d.h., durch eine Turingmaschine, die die Position $p < 0$ nie benutzt, simuliert werden kann. Wie groß ist der Zeitverlust?\\\\
+
+Wir benutzen eine zweite Spur um  die Positionen $p \leq 0$ zu simulieren.\\
+An Position $p_0 = 0$ steht ein einzigartiges Zeichen auf beiden Spuren, um diese Position zu erkennen.\\
+Zugriffe auf $p \leq 0$ werden zu $1+ \left| p \right|$.\\
+$\delta$ wird in $\delta'$ geklont.\\
+Solange der Lesekopf auf $p < 0$ steht wird Spur 2 ignoriert und einzig in Spur 1 gearbeitet.\\
+Sobald das Sonderzeichen, welches Position 0 markiert, gelesen wird, wird zu $\delta'$ gewechselt.\\
+$\delta'$ ignoriert Spur 1 und arbeitet in Spur 2. Zusätzlich werden die Schrittrichtungen gespiegelt (L wird zu R, R zu L).\\
+Selbstverständlich wird hier beim Lesen vom Sonderzeichen wieder zu $\delta$ gewechselt.\\\\
+
+Die Laufzeit ist hier nicht anders als bei einer beidseitig unendlichen TM (der Speicherverbrauch ist aber höher).
