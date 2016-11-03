@@ -8,4 +8,31 @@ Zeigen Sie, dass die Menge $\mathbb{N}^* = \bigcup_{n \in \mathbb{N}} \mathbb{N}
 \subsection*{Aufgabe 3.4}
 Welche der folgenden Sprachen sind entscheidbar? Beweisen Sie die Korrektheit ihrer Antwort.\\
 a) $H_{\leq 42} = \{\langle M \rangle w \mid M$ hält auf Eingabe $w$ und zwar nach höchstens 42 Schritten$\}$\\
-b) $H_{\geq 42} = \{\langle M \rangle w \mid M$ hält auf Eingabe $w$ und zwar nach mindestens 42 Schritten$\}$
+
+Die Sprache $H_{\leq 42}$ ist entscheidbar. Wir kreiern eine 
+TM $M_{H \leq 42}$ die wie folgt arbeitet. $M_{H \leq 42}$
+ simuliert $\langle M \rangle$ mit der Eingabe $w$ und 
+speichert zusätzlich einen Zähler welche die Anzahl der bereits
+ausgeführten Schritte
+zählt. Terminiert $M$ bevor der Zähler 42 erreicht, so akzeptiert
+$M_{H \leq 42}$, andernfalls verwirft $M_{H \leq 42}$ nach 42
+Schritten.\\
+
+b) $H_{\geq 42} = \{\langle M \rangle w \mid M$ hält auf Eingabe $w$ und zwar nach mindestens 42 Schritten$\}$\\
+
+Die Sprache $H_{\geq 42}$ ist nicht entscheidbar. Angenommen eine 
+TM $M_{H\geq 42}$ würde existieren, welche $H_{\geq 42}$
+entscheidet. Wir könnten dann eine TM $M_{H_{\epsilon}}$
+konstruieren welche das Halteproblem $H_{\epsilon}$ entscheidet.
+Hierzu würde $M_{H_{\epsilon}}$ aus der gegebenen TM $\langle M 
+\rangle$ eine TM 
+$M'$ berechnen, welche 42 Schritte nach rechts läuft und 
+anschliessend die TM $M$ mit Eingabe $w$ simuliert. 
+$M_{H_{\epsilon}}$ ruft also $M_{H\geq 42}$ mit $M'$ als 
+Unterprogramm auf und übernimmt das Akzeptanzverhalten.
+
+
+TODO: Korrektheit zeigen
+
+
+
