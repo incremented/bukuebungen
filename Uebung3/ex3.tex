@@ -1,7 +1,27 @@
 \section*{3. Übung}
 \subsection*{Aufgabe 3.1}
 Beschreiben Sie eine 1-Band-TM, die die Sprache $L = \{0^n1^n \mid n \in \mathbb{N}\}$ mit einem Zeitbedarf in $O(m \hspace{0,15cm} log \hspace{0,15cm} m)$ akzeptiert, wobei $m$ die Länge der Eingabe bezeichnet.\\
-Es ist \textbf{nicht} notwendig die Turingmaschine explizit anzugeben. Eine Beschreibung ihrer Arbeitsweise und Laufzeit in den einzelnen Arbeitschritten genügt.
+Es ist \textbf{nicht} notwendig die Turingmaschine explizit anzugeben. Eine Beschreibung ihrer Arbeitsweise und Laufzeit in den einzelnen Arbeitschritten genügt.\\
+\\
+
+Eine TM die $L$ erkennt, müsste die Anzahl der Einsen und Nullen
+zählen und am ende vergleichen. Wir verwenden hierzu eine 1-Band
+TM mit 3 Spuren.
+Unsere TM $M_{L}$ arbeitet wie folgt:\\
+
+\begin{enumerate}
+    \item Prüfe zunächst ob die Einagbe der Form $0^*1^*$ ist. O(m) 
+    \item Laufe nun von links nach rechts über das Band und zähle
+    die Anzahl der Nullen mit einem Zähler auf der zweiten Spur. $O(m \hspace{0,15cm} log \hspace{0,15cm} m)$
+    \item Zähle ab dem Erreichen der ersten Eins alle Einsen auf der dritten Spur $O(m \hspace{0,15cm} log \hspace{0,15cm} m)$
+    \item Zum Vergleichen der Zähler müssen diese untereinander stehen. Verschiebe also nun den Zähler der zweiten Spur soweit nach rechts, bis er über dem Zähler der dritten Spur steht. $O(m \hspace{0,15cm} log \hspace{0,15cm} m)$
+    \item Vergleiche nun die beiden Zähler und akzeptiere wenn diese gleich sind. Ansonsten reject. $O(log \hspace{0,15cm} m)$
+\end{enumerate}
+
+Der Zeitbedarf beträgt also $O(m \hspace{0,15cm} log \hspace{0,15cm} m)$
+
+\newpage
+
 \subsection*{Aufgabe 3.2} Geben Sie das Programm einer Registermaschine zur Berechnung des Zweierlogarithmus $\lfloor $log$_2 \hspace{0,1cm} n \rfloor$ für eine Eingabe $n \in \mathbb{N}$ an. Erläutern Sie kurz seine Funktionsweise.\\
 
 Wir speichern die Eingabe in $c(1)$, in $c(2)$ wird später die Ausgabe sein. $c(0)$ und $c(2)$ sind zunächst mit 0 initialisiert.
@@ -21,6 +41,9 @@ Die Registermaschine berechnet wie viele mal man die Eingabe durch 2 teilen muss
 
 \subsection*{Aufgabe 3.3}
 Zeigen Sie, dass die Menge $\mathbb{N}^* = \bigcup_{n \in \mathbb{N}} \mathbb{N}^n$ der endlichen Wörter über den natürlichen Zahlen abzählbar ist.
+
+
+\newpage
 \subsection*{Aufgabe 3.4}
 Welche der folgenden Sprachen sind entscheidbar? Beweisen Sie die Korrektheit ihrer Antwort.\\
 a) $H_{\leq 42} = \{\langle M \rangle w \mid M$ hält auf Eingabe $w$ und zwar nach höchstens 42 Schritten$\}$\\
@@ -34,6 +57,21 @@ zählt. Terminiert $M$ bevor der Zähler 42 erreicht, so akzeptiert
 $M_{H \leq 42}$, andernfalls verwirft $M_{H \leq 42}$ nach 42
 Schritten.\\
 
+Korrektheit:\\
+
+$\langle M \rangle w \in H_{\leq42}$\\
+$\implies M_{H\leq42}$ simuliert $\langle M \rangle$\\
+$\implies \langle M \rangle$ terminiert bevor Zähler 42 Schritte zählt\\
+$\implies M_{H\leq42}$ akzeptiert $\langle M \rangle$\\
+\\
+
+$\langle M \rangle w \not\in H_{\leq42}$\\
+$\implies M_{H\leq42}$ simuliert $\langle M \rangle$\\
+$\implies \langle M \rangle$ terminiert nicht in 42 Schritten\\
+$\implies M_{H\leq42}$ verwirft die Eingabe\\
+\\
+
+
 b) $H_{\geq 42} = \{\langle M \rangle w \mid M$ hält auf Eingabe $w$ und zwar nach mindestens 42 Schritten$\}$\\
 
 Die Sprache $H_{\geq 42}$ ist nicht entscheidbar. Angenommen eine 
@@ -46,9 +84,4 @@ $M'$ berechnen, welche 42 Schritte nach rechts läuft und
 anschliessend die TM $M$ mit Eingabe $w$ simuliert. 
 $M_{H_{\epsilon}}$ ruft also $M_{H\geq 42}$ mit $M'$ als 
 Unterprogramm auf und übernimmt das Akzeptanzverhalten.
-
-
-TODO: Korrektheit zeigen
-
-
 
