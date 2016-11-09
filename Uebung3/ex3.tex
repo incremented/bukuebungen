@@ -2,7 +2,23 @@
 \subsection*{Aufgabe 3.1}
 Beschreiben Sie eine 1-Band-TM, die die Sprache $L = \{0^n1^n \mid n \in \mathbb{N}\}$ mit einem Zeitbedarf in $O(m \hspace{0,15cm} log \hspace{0,15cm} m)$ akzeptiert, wobei $m$ die Länge der Eingabe bezeichnet.\\
 Es ist \textbf{nicht} notwendig die Turingmaschine explizit anzugeben. Eine Beschreibung ihrer Arbeitsweise und Laufzeit in den einzelnen Arbeitschritten genügt.
-\subsection*{Aufgabe 3.2} Geben Sie das Programm einer Registermaschine zur Berechnung des Zweierlogarithmus $\lfloor $log$_2 \hspace{0,1cm} n \rfloor$ für eine Eingabe $n \in \mathbb{N}$ an. Erläutern Sie kurz seine Funktionsweise.
+\subsection*{Aufgabe 3.2} Geben Sie das Programm einer Registermaschine zur Berechnung des Zweierlogarithmus $\lfloor $log$_2 \hspace{0,1cm} n \rfloor$ für eine Eingabe $n \in \mathbb{N}$ an. Erläutern Sie kurz seine Funktionsweise.\\
+
+Wir speichern die Eingabe in $c(1)$, in $c(2)$ wird später die Ausgabe sein. $c(0)$ und $c(2)$ sind zunächst mit 0 initialisiert.
+\begin{enumerate}
+	\item LOAD 2
+	\item CADD 1
+	\item STORE 2
+	\item LOAD 1
+	\item CDIV 2
+	\item STORE 1
+	\item IF $c(0) > 0$ GOTO 1
+	\item LOAD 2
+	\item CSUB 1
+	\item END
+\end{enumerate}
+Die Registermaschine berechnet wie viele mal man die Eingabe durch 2 teilen muss um auf 1 zu kommen.
+
 \subsection*{Aufgabe 3.3}
 Zeigen Sie, dass die Menge $\mathbb{N}^* = \bigcup_{n \in \mathbb{N}} \mathbb{N}^n$ der endlichen Wörter über den natürlichen Zahlen abzählbar ist.
 \subsection*{Aufgabe 3.4}
