@@ -1,0 +1,22 @@
+\section*{3. Übung}
+\subsection*{Aufgabe 3.1}
+Sei $$L_\text{self} = \{\langle M \rangle \mid M \text{ verwirft } \langle M \rangle \}.$$
+Zeigen Sie durch Diagonalisierung, dass $L_\text{self}$ nicht entscheidbar ist.
+
+\subsection*{Aufgabe 3.2}
+Zeigen oder widerlegen Sie, dass folgende Probleme entscheidbar sind. Sie können gegebenenfalls den Satz von Rice verwenden.
+\begin{enumerate}
+	\item $\textbf{H}_\text{never}$: Gegeben eine TM $M$, stoppt $M$ auf keiner Eingabe?
+	\item $\textbf{S}_{15}$: Gegeben eine TM $M$, besucht $M$ bei Eingabe 101 den Zustand $q_{15}$?
+	\item $\textbf{I}_\mathbb{P}$: Gegeben eine TM $M$, gilt $L(M)= \mathbb{P}$? Hierbei sei $\mathbb{P} = \{\text{bin}(p) \mid p \text{ ist Primzahl} \}$ die Menge der Binärdarstellungen der Primzahlen.
+	\item $\textbf{L}_\text{comp}$: Gegeben zwei TMen $M_1$ und $M_2$, gilt $L(M_1) = \bar{L(M_{2})}$?
+\end{enumerate}
+
+\subsection*{Aufgabe 3.3}
+Für eine Turingmaschine $M$ über dem Eingabealphabet $\Sigma = \{0,1\}$ und einem Wort $w \in \Sigma^*$ sei $M_w^*$ eine Turingmaschine, die bei Eingabe $\epsilon$ zunächst das Wort $w$ auf das Band schreibt und dann $M$ auf $w$ simuliert. Bei anderen Eingaben darf sich $M_w^*$ beliebig verhalten.
+\begin{enumerate}
+	\item Geben Sie eine \textbf{formale} Definition für $M_w^*$ an.
+	\item Beschreiben Sie grob die Funktionsweise einer Turingmaschine $N$, die bei Eingabe $\langle M \rangle w$ die Gödelnummer von $M_w^*$ berechnet. Sollte die Eingabe nicht das vorgegebene Format haben darf sich die Turingmaschine $N$ beliebig verhalten.\\
+	\textbf{Hinweis:} Sie können für $N$  eine Mehrband-TM verwenden.
+\end{enumerate}
+\textbf{Bemerkung:} Diese Aufgabe ist Teil des Beweises für die Unentscheidbarkeit des speziellen Halteproblems $H_\epsilon$ (siehe Vorlesung).

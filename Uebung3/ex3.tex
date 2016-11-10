@@ -40,8 +40,18 @@ Wir speichern die Eingabe in $c(1)$, in $c(2)$ wird später die Ausgabe sein. $c
 Die Registermaschine berechnet wie viele mal man die Eingabe durch 2 teilen muss um auf 1 zu kommen.
 
 \subsection*{Aufgabe 3.3}
-Zeigen Sie, dass die Menge $\mathbb{N}^* = \bigcup_{n \in \mathbb{N}} \mathbb{N}^n$ der endlichen Wörter über den natürlichen Zahlen abzählbar ist.
+Zeigen Sie, dass die Menge $\mathbb{N}^* = \bigcup_{n \in \mathbb{N}} \mathbb{N}^n$ der endlichen Wörter über den natürlichen Zahlen abzählbar ist.\\
 
+Wir haben ein Wort der Länge n $W_n=\{w_1w_2w_3 \dots w_n \mid w_i \in \text{Alphabet}\}$. und ein Alphabet A.\\
+Für ein endliches Alphabet ist $\mathbb{N}^*$ offensichtlich auch endlich ($1+\sum_{i=1}^{n}\left|A\right|^i$) und somit durch aufstellen in kanonischer Reihenfolge einfach abzählbar.\\
+Für ein unendliches Alphabet gilt:\\
+Worte der Länge 1 sind offensichtlich in kanonischer Reihenfolge unendlich abzählbar.\\
+Die Länge der Worte der Länge $n$ sind unendlich abzählbar, da wir sie auch in kanonischer Reihenfolge aufschreiben können: $w_1w_1\cdots w_1, 
+\hspace{0.2cm}w_2 \cdots w_2, 
+\hspace{0.2cm}\cdots , 
+\hspace{0.2cm}w_2 w_1 \cdots w_1, 
+\hspace{0.2cm}\cdots \cdots$\\
+Da die Länge der Worte endlich ist, ist $\mathbb{N}^*$ somit eine endliche Vereinigung von abzählbar unendlichen Mengen und somit ebenfalls abzählbar unendlich.
 
 \newpage
 \subsection*{Aufgabe 3.4}
