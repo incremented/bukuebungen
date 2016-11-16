@@ -1,7 +1,33 @@
 \section*{3. Übung}
 \subsection*{Aufgabe 3.1}
 Sei $$L_\text{self} = \{\langle M \rangle \mid M \text{ verwirft } \langle M \rangle \}.$$
-Zeigen Sie durch Diagonalisierung, dass $L_\text{self}$ nicht entscheidbar ist.
+Zeigen Sie durch Diagonalisierung, dass $L_\text{self}$ nicht entscheidbar ist.\\
+
+Beweis durch Widerspruch. Wir nehmen an, dass $L_\text{self}$
+entscheidbar ist. Dann gibt es eine TM $M_{L_{\text{self}}}$ die
+$L_\text{self}$ entscheidet. Mit Hilfe von $M_{L_{\text{self}}}$
+konstruieren wir nun eine TM $M_{\bar{D}}$ welche die
+Diagonalsprache entscheidet was zu einem Widerspruch führt. 
+$M_{\bar{D}}$ arbeitet wie folgt:
+
+\begin{enumerate}
+    \item Berechne zur Eingabe $w$ das $i$, so dass gilt $w = w_i$
+    \item Berechne nun die Gödelnummer der i-ten TM 
+    $\langle M_i \rangle$
+    \item Starte $M_{L_{\text{self}}}$ mit Eingabe 
+            $\langle M_i \rangle$ und simuliere.
+    \item Übernehme das akzeptansverhalten von $M_{L_{\text{self}}}$
+\end{enumerate}
+
+Korrektheit:\\
+
+Sei $w \in \bar{D} \implies$ $M_{L_{\text{self}}}$ akzeptiert
+$\langle M_i \rangle$ und hält\\
+$\implies M_{\bar{D}}$ akzeptiert $w$\\
+
+Sei $w \not\in \bar{D} \implies M_{L_{\text{self}}}$ verwirft
+$\langle M_i \rangle$ und hält\\
+$\implies M_{\bar{D}}$ akzeptiert $w$ nicht\\
 
 \subsection*{Aufgabe 3.2}
 Zeigen oder widerlegen Sie, dass folgende Probleme entscheidbar sind. Sie können gegebenenfalls den Satz von Rice verwenden.
