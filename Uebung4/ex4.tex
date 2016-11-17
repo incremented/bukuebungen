@@ -1,7 +1,7 @@
-\section*{3. Übung}
-\subsection*{Aufgabe 3.1}
+\section*{4. Übung}
+\subsection*{Aufgabe 4.1}
 Sei $$L_\text{self} = \{\langle M \rangle \mid M \text{ verwirft } \langle M \rangle \}.$$
-Zeigen Sie durch Diagonalisierung, dass $L_\text{self}$ nicht entscheidbar ist.\\
+Zeigen Sie durch Diagonalisierung, dass $L_\text{self}$ nicht entscheidbar ist.\
 
 Beweis durch Widerspruch. Wir nehmen an, dass $L_\text{self}$
 entscheidbar ist. Dann gibt es eine TM $M_{L_{\text{self}}}$ die
@@ -11,12 +11,12 @@ Diagonalsprache entscheidet was zu einem Widerspruch führt.
 $M_{\bar{D}}$ arbeitet wie folgt:
 
 \begin{enumerate}
-    \item Berechne zur Eingabe $w$ das $i$, so dass gilt $w = w_i$
-    \item Berechne nun die Gödelnummer der i-ten TM 
-    $\langle M_i \rangle$
-    \item Starte $M_{L_{\text{self}}}$ mit Eingabe 
-            $\langle M_i \rangle$ und simuliere.
-    \item Übernehme das akzeptansverhalten von $M_{L_{\text{self}}}$
+	\item Berechne zur Eingabe $w$ das $i$, so dass gilt $w = w_i$
+	\item Berechne nun die Gödelnummer der i-ten TM 
+	$\langle M_i \rangle$
+	\item Starte $M_{L_{\text{self}}}$ mit Eingabe 
+	$\langle M_i \rangle$ und simuliere.
+	\item Übernehme das akzeptansverhalten von $M_{L_{\text{self}}}$
 \end{enumerate}
 
 Korrektheit:\\
@@ -27,18 +27,67 @@ $\implies M_{\bar{D}}$ akzeptiert $w$\\
 
 Sei $w \not\in \bar{D} \implies M_{L_{\text{self}}}$ verwirft
 $\langle M_i \rangle$ und hält\\
-$\implies M_{\bar{D}}$ akzeptiert $w$ nicht\\
+$\implies M_{\bar{D}}$ akzeptiert $w$ nicht\.\
 
-\subsection*{Aufgabe 3.2}
+\subsection*{Aufgabe 4.2}
 Zeigen oder widerlegen Sie, dass folgende Probleme entscheidbar sind. Sie können gegebenenfalls den Satz von Rice verwenden.
 \begin{enumerate}[(a)]
-	\item $\textbf{H}_\text{never}$: Gegeben eine TM $M$, stoppt $M$ auf keiner Eingabe?
+	\item $\textbf{H}_\text{never}$: Gegeben eine TM $M$, stoppt $M$ auf keiner Eingabe?\\\\
+	Nicht entscheidbar.\\
+	Sei $\mathcal{S} = \{f_M \mid f_M(x) = \perp \forall x \in \Sigma^{*} \}$, $\emptyset \subsetneq \mathcal{S} \subsetneq \mathcal{R} $.\\
+	Dann ist $L(\mathcal{S}) = \{ \langle M \rangle \mid M \text{ berechnet eine Funktion aus } \mathcal{S} \}$\\
+	= $\{ \langle M \rangle \mid M \text{ hält nicht auf } x \hspace{0.1cm}\forall x \in \Sigma^{*} \}$\\
+	$=H_{\text{never}}$\\
+	$\overset{\text{S.v. Rice}}{\implies} H_{\text{never}}$ ist nicht entscheidbar.\\
+	
 	\item $\textbf{S}_{15}$: Gegeben eine TM $M$, besucht $M$ bei Eingabe 101 den Zustand $q_{15}$?
-	\item $\textbf{I}_\mathbb{P}$: Gegeben eine TM $M$, gilt $L(M)= \mathbb{P}$? Hierbei sei $\mathbb{P} = \{\text{bin}(p) \mid p \text{ ist Primzahl} \}$ die Menge der Binärdarstellungen der Primzahlen.
-	\item $\textbf{L}_\text{comp}$: Gegeben zwei TMen $M_1$ und $M_2$, gilt $L(M_1) = \overline{L(M_2)}$?
+	
+	\item $\textbf{I}_\mathbb{P}$: Gegeben eine TM $M$, gilt $L(M)= \mathbb{P}$? Hierbei sei $\mathbb{P} = \{\text{bin}(p) \mid p \text{ ist Primzahl} \}$ die Menge der Binärdarstellungen der Primzahlen.\\\\
+	Wir erschaffen eine Turingmaschine, welche die Eingabe auf restlose Teilbarkeit durch 2 bis $n-1$ prüft.
+	Dazu wählen wir eine 3-spurige TM.\\
+	Auf die erste Spur wird die Eingabe geschrieben.\\
+	Die zweite Spur hält den aktuellen (in binär codierten) Teiler.\\
+	Auf der dritten Spur findet die Berechnung statt.\\
+	Anfangs schreiben wir auf die zweite Spur eine 1 und prüfen, ob die Eingabe $ \ge 2$ ist. Bei 0 oder 1 wird rejected.\\
+	(*) Der Algorithmus geht nun wie folgt vor:\\
+	Spur 1 wird auf Spur 3 kopiert und Spur 2 um 1 vergrößert. Sind Spuren 1 und 2 nun gleich wird die Zahl akzeptiert.\\
+	Auf Spur 3 wird nun ein beliebiger Divisions-Algorithmus ausgeführt. Erhält die Maschine dabei einen Rest von 0 wird die Zahl rejected. Ansonsten wird Spur 3 gesäubert, der Lesekopf auf die erste Position zurückgesetzt und der Algorithmus geht von (*) an wieder los.\\
+	$\textbf{I}_\mathbb{P}$ ist somit entscheidbar.\\
+	
+	\item $\textbf{L}_\text{comp}$: Gegeben zwei TMen $M_1$ und $M_2$, gilt $L(M_1) = \overline{L(M_2)}$?\\
+	Wir versuchen mit der Unterprogrammtechnik die Unentscheidbarkeit zu beweisen.
+	
+	$$\text{L}_\text{comp} := \{ \langle M_1 \rangle \langle M_2 \rangle \mid L(M_1) = \overline{L(M_2)} \}$$
+	
+	$$f : x \in H \Leftrightarrow f(x) \in \text{L}_\text{comp}$$
+	$$\rightarrow x = \langle M \rangle w : f(x) = \langle M^{*} \rangle \langle M' \rangle$$
+	$$\rightarrow x \neq \langle M \rangle w : f (x) = x$$
+$M^*$ ist Gödelnummer einer TM welche die Eingabe löscht, $w$ auf das Band schreibt, $M$ auf $w$ simuliert und w akzeptiert wenn $M$ auf $w$ hält.\\
+$M'$ ist Gödelnummer einer TM welche alle Eingaben rejected.\\
+Da sowohl $M^*$ und $M'$ berechnet werden können ist auch $f$ berechenbar.\\
+Korrektheit:\\
+$x \neq \langle M \rangle w : x \notin H , f(x) \notin \text{L}_\text{comp}$\\
+$x= \langle M \rangle w $\\
+Für $ x \in H$:\\
+$\Rightarrow M$ hält auf $w$\\
+$\Rightarrow M^*$ akzeptiert alle Eingaben.\\
+$\Rightarrow M^*$ akzeptiert das Komplement der Sprache die $M'$ akzeptiert.\\
+$\Rightarrow \langle M^* \rangle \langle M' \rangle \in \text{L}_\text{comp}$\\
+$\Rightarrow f(x) \in \text{L}_\text{comp}$\\
+Für $x \notin H$:\\
+$\Rightarrow M$ hält nicht auf $w$\\
+$\Rightarrow M^*$ akzeptiert keine Eingabe\\
+$\Rightarrow M^*$ akzeptiert das Komplement der Sprache die $M'$ akzeptiert nicht.\\
+$\Rightarrow \langle M^* \rangle \langle M' \rangle \notin \text{L}_\text{comp}$\\
+$\Rightarrow f(x) \notin \text{L}_\text{comp}$\\
+	
+$x \in H \Leftrightarrow f(x) \in \text{L}_\text{comp}$\\
+$\Rightarrow \text{L}_\text{comp}$ ist unentscheidbar.
+	
+	
 \end{enumerate}
 
-\subsection*{Aufgabe 3.3}
+\subsection*{Aufgabe 4.3}
 Für eine Turingmaschine $M$ über dem Eingabealphabet $\Sigma = \{0,1\}$ und einem Wort $w \in \Sigma^*$ sei $M_w^*$ eine Turingmaschine, die bei Eingabe $\epsilon$ zunächst das Wort $w$ auf das Band schreibt und dann $M$ auf $w$ simuliert. Bei anderen Eingaben darf sich $M_w^*$ beliebig verhalten.
 \begin{enumerate}[(a)]
 	\item Geben Sie eine \textbf{formale} Definition für $M_w^*$ an.
