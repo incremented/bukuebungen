@@ -1,0 +1,24 @@
+\section*{4. Übung}
+\subsection*{Aufgabe 7.1}
+Sei $k \in \mathbb{N}$ fest. Geben Sie für folgende RAM-Befehle jeweils ein äquivalentes RAM-Programm mit eingeschränktem Befehlssatz (siehe Folie 310) an, wobei Sie voraussetzen können, dass alle Register $j$ mit $j \ge k$ den Wert $e(j) = 0$ haben.
+\begin{enumerate}[(a)]
+	\item MULT 1, das heißt $c(0) := c(0) \cdot c(1)$
+	\item INDLOAD $i$
+\end{enumerate}
+\subsection*{Aufgabe 7.2}
+\begin{enumerate}[(a)]
+	\item Ist das Problem, ob ein gegebenes LOOP-Programm zu einer Eingabe $x$ die Ausgabe $y$ berechnet, entscheidbar? Begründen Sie die Antwort.
+	\item Ist das Problem, ob ein gegebenes WHILE-Programm zu einer Eingabe $x$ die Ausgabe $y$ berechnet eintscheidbar? Begründen Sie die Antwort.
+\end{enumerate}
+\subsection*{Aufgabe 7.3}
+Für jedes LOOP-Programm $P$ sei $\langle P \rangle$ eine geeignete Kodierung von $P$ (ähnlich zu Gödelnummern für Turingmaschinen). Sei
+$$A_{ \text{LOOP} }= \{\langle P \rangle \mid P \text{ gibt bei Eingabe 0 das Ergebnis 1 zurück}\}.$$
+Welche der folgenden beziehungen zwischen $A_{\text{LOOP}}$ und dem Halteproblem $H$ für Turingmaschinen treffen zu?
+\begin{enumerate}[(a)]
+	\item $A_{\text{LOOP}} \leq H$
+	\item $H \leq A_{\text{LOOP}}$
+\end{enumerate}
+Begründen Sie Ihre Antwort.
+\subsection*{Aufgabe 7.4}
+Zeigen Sie, dass $A(m+1,n) > A(m,n)$ für alle $m,n \in \mathbb{N}$ gilt. Sie dürfen dabei ohne Beweis verwenden, dass $A(m,n+1) > A(m,n)$.\\
+\textbf{Bemerkung:} Als Zusatz können Sie bei Interesse versuchen, beide Ungleichungen zu beweisen.
