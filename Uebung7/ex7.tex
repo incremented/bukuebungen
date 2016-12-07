@@ -32,7 +32,8 @@ LOAD, STORE, CLOAD, CSUB, CADD, GOTO, IF $c(0) \neq 0$ THEN GOTO $j$, END
 	\end{enumerate}
 	
 	\item INDLOAD $i$
-	INDLOAD: $c(0) := c(c(i))$
+	INDLOAD: $c(0) := c(c(i))$\\
+	Da wir zwar $c(i)$ laden können, danach aber nicht direkt $c(c(i))$ machen wir so lange IF-Abfragen, bis wir herausgefunden haben, welche Zahl in $c(i)$ gespeichert war.
 	\begin{enumerate}[ 1.]
 		\item LOAD $i$
 		\item IF $c(0) \neq 0$ GOTO 5
@@ -42,18 +43,18 @@ LOAD, STORE, CLOAD, CSUB, CADD, GOTO, IF $c(0) \neq 0$ THEN GOTO $j$, END
 		\item IF $c(0) \neq 0$ GOTO 9
 		\item LOAD 1
 		\item END
-		\item CSUB
+		\item CSUB 1
 		\item IF $c(0) \neq 0$ GOTO 11
 		\item LOAD 2
 		\item END\\
 		...
 	\end{enumerate}
 	\begin{enumerate}[j+1]
-		\item CSUB
+		\item CSUB 1
 		\item IF $c(0) \neq 0$ GOTO j$+5$
 		\item LOAD $k-1$
 		\item END
-		\item CSUB
+		\item CSUB 1
 		\item LOAD k
 		\item END
 	\end{enumerate}
@@ -63,17 +64,26 @@ LOAD, STORE, CLOAD, CSUB, CADD, GOTO, IF $c(0) \neq 0$ THEN GOTO $j$, END
 \begin{enumerate}[(a)]
 	\item Ist das Problem, ob ein gegebenes LOOP-Programm zu einer Eingabe $x$ die Ausgabe $y$ berechnet, entscheidbar? Begründen Sie die Antwort.\\
 	Per Definition terminiert ein LOOP-Programm immer. Darum kann das Programm mit der Eingabe $x$ einfach laufen lassen und das Ergebnis mit $y$ vergleichen. Das Problem ist somit entscheidbar.
-	\item Ist das Problem, ob ein gegebenes WHILE-Programm zu einer Eingabe $x$ die Ausgabe $y$ berechnet eintscheidbar? Begründen Sie die Antwort.
+	\item Ist das Problem, ob ein gegebenes WHILE-Programm zu einer Eingabe $x$ die Ausgabe $y$ berechnet eintscheidbar? Begründen Sie die Antwort.\\
 	WHILE-Programme sind Turingmächtig. Dies führt dazu, dass sie nicht immer terminieren müssen und somit ist
 	das Problem auch nicht entscheidbar.
 \end{enumerate}
 \subsection*{Aufgabe 7.3}
 Für jedes LOOP-Programm $P$ sei $\langle P \rangle$ eine geeignete Kodierung von $P$ (ähnlich zu Gödelnummern für Turingmaschinen). Sei
 $$A_{ \text{LOOP} }= \{\langle P \rangle \mid P \text{ gibt bei Eingabe 0 das Ergebnis 1 zurück}\}.$$
-Welche der folgenden beziehungen zwischen $A_{\text{LOOP}}$ und dem Halteproblem $H$ für Turingmaschinen treffen zu?
+Welche der folgenden Beziehungen zwischen $A_{\text{LOOP}}$ und dem Halteproblem $H$ für Turingmaschinen treffen zu?
 \begin{enumerate}[(a)]
-	\item $A_{\text{LOOP}} \leq H$
-	\item $H \leq A_{\text{LOOP}}$
+	\item $A_{\text{LOOP}} \leq H$\\
+	Für jedes LOOP-Programm, welches eine primitiv rekursive Funktion $f_P$ berechnet, können wir eine TM $T_P$ erzeugen, welche auch $f_P$ berechnet, da die Menge der primitiv rekursiven Funktionen eine Teilmenge der von Turingmaschinen berechenbaren Funktionen ist.\\
+	Wir können demnach $A_\text{LOOP}$ entscheiden, indem wir $T_P$ mit 0 ausführen und das Ergebnis auslesen, sobald die TM angehalten ist.\\
+	Wir definieren die Simulationsfunktion von $P$ als $f_S$, wobei $f_S(\langle P \rangle w) = f_T (w)$, mit $f_T$ als die die $T_P$ berechnete Funktion, gilt.\\
+	Es ergibt sich $\langle P \rangle w \in A_\text{LOOP} \Rightarrow f_S(\langle P \rangle w) \in H$.\\
+	Wir definieren anschließend eine Funktion $f'_S$, wobei $f'_S = 1$ falls $f_S(w)=1$ und $f'_S = \perp$, falls $f_S(w) \neq 1$.\\
+	Mit $\langle P \rangle w \in A_\text{LOOP}$ folgt $f_S(\langle P \rangle w) = 1 = f'_S(\langle P \rangle w)$. Wie oben gilt demnach auch $\langle P \rangle w \in A_\text{LOOP} \Rightarrow f'_S(\langle P \rangle w) \in H$, da
+	mit $f'_S(\langle P \rangle w) \in H$ auch $f'_S(\langle P \rangle w) \neq \perp$ gelten muss und somit ebenfalls $f'_S(\langle P \rangle w) = 1 = f_S(\langle P \rangle w)$ und $ \langle P \rangle w \in A_\text{LOOP}$.\\
+	Es folgt $\langle P \rangle w \in A_\text{LOOP} \Leftrightarrow f'_S (\langle P \rangle w ) \in H$ woraus schließlich $A_\text{LOOP} \le H$ folgt.\\
+	\item $H \leq A_{\text{LOOP}}$\\
+	Da $A_\text{LOOP}$ entscheidbar ist (7.2a und 7.3a), $H$ aber offensichtlich nicht, ist $H \le A_\text{LOOP}$ offensichtlich falsch.
 \end{enumerate}
 Begründen Sie Ihre Antwort.
 \subsection*{Aufgabe 7.4}
