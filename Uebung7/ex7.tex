@@ -64,6 +64,8 @@ LOAD, STORE, CLOAD, CSUB, CADD, GOTO, IF $c(0) \neq 0$ THEN GOTO $j$, END
 	\item Ist das Problem, ob ein gegebenes LOOP-Programm zu einer Eingabe $x$ die Ausgabe $y$ berechnet, entscheidbar? Begründen Sie die Antwort.\\
 	Per Definition terminiert ein LOOP-Programm immer. Darum kann das Programm mit der Eingabe $x$ einfach laufen lassen und das Ergebnis mit $y$ vergleichen. Das Problem ist somit entscheidbar.
 	\item Ist das Problem, ob ein gegebenes WHILE-Programm zu einer Eingabe $x$ die Ausgabe $y$ berechnet eintscheidbar? Begründen Sie die Antwort.
+	WHILE-Programme sind Turingmächtig. Dies führt dazu, dass sie nicht immer terminieren müssen und somit ist
+	das Problem auch nicht entscheidbar.
 \end{enumerate}
 \subsection*{Aufgabe 7.3}
 Für jedes LOOP-Programm $P$ sei $\langle P \rangle$ eine geeignete Kodierung von $P$ (ähnlich zu Gödelnummern für Turingmaschinen). Sei
@@ -77,3 +79,37 @@ Begründen Sie Ihre Antwort.
 \subsection*{Aufgabe 7.4}
 Zeigen Sie, dass $A(m+1,n) > A(m,n)$ für alle $m,n \in \mathbb{N}$ gilt. Sie dürfen dabei ohne Beweis verwenden, dass $A(m,n+1) > A(m,n)$.\\
 \textbf{Bemerkung:} Als Zusatz können Sie bei Interesse versuchen, beide Ungleichungen zu beweisen.
+
+Ackermanfunktions Definition:\\
+$A : \mathbb{N}^{2} \rightarrow \mathbb{N}$\\
+$A(0,n) = n + 1$ für $n \ge 0$\\
+$A(m + 1, 0) = A(m,1)$ für $m \ge 0$\\
+$A(m + 1, n + 1) = A(m, A(m + 1, n))$ für $m,n \ge 0$\\
+
+Zu zeigen: Ackermannfunktion wächst stetig an.\\
+Schon bewiesen: $A(m, n+1) > A(m,n)$\\
+Bleibt noch zu zeigen: $A(m + 1, n) > A(m,n)$\\
+
+Beweis per Induktion über n:\\
+
+INDUKTIONSANFANG:\\
+$A(m+1, 0) = A(m,1)$ (siehe Definition)\\
+
+INDUKTIONSVORAUSSETZUNG:\\
+$A(m+1, n-1) \ge A(m,n)$\\
+
+INDUKTIONSSCHRITT:\\
+$A(m + 1, n) = A(m, A(m + 1, n - 1)) \ge A(m, A(m,n)) \ge A(m, n + 1)$ (mit I.V.)\\
+
+Wegen $A(m, n+1) > A(m,n)$ gilt also:\\
+$A(m,n) < A(m + 1,n)$
+
+
+
+
+
+
+
+
+
+
