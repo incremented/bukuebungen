@@ -1,13 +1,68 @@
 \section*{4. Übung}
 \subsection*{Aufgabe 7.1}
-Sei $k \in \mathbb{N}$ fest. Geben Sie für folgende RAM-Befehle jeweils ein äquivalentes RAM-Programm mit eingeschränktem Befehlssatz (siehe Folie 310) an, wobei Sie voraussetzen können, dass alle Register $j$ mit $j \ge k$ den Wert $e(j) = 0$ haben.
+Sei $k \in \mathbb{N}$ fest. Geben Sie für folgende RAM-Befehle jeweils ein äquivalentes RAM-Programm mit eingeschränktem Befehlssatz (siehe Folie 310) an, wobei Sie voraussetzen können, dass alle Register $j$ mit $j \ge k$ den Wert $c(j) = 0$ haben.\\
+Verfügbare Befehle:\\
+LOAD, STORE, CLOAD, CSUB, CADD, GOTO, IF $c(0) \neq 0$ THEN GOTO $j$, END
 \begin{enumerate}[(a)]
-	\item MULT 1, das heißt $c(0) := c(0) \cdot c(1)$
+	\item MULT 1, das heißt $c(0) := c(0) \cdot c(1)$\\
+	Wir benutzen zwei Schleifen: Die innere addiert $c(1)$-mal 1 auf das Ergebnis, die äußere lässt dies $c(0)$ mal passieren.\\
+	$k$ speichert das Ergebnis und ist anfangs 0
+	\begin{enumerate}[1.]
+		\item STORE $k+1$	 (Speichert das originale $c(0)$ um darüber zu iterieren)
+		\item LOAD 1
+		\item STORE $k+2$	 (Speichert das originale $c(1)$)
+		\item STORE $k+3$	 (Speichert das originale $c(1)$ um darüber zu iterieren)
+		\item LOAD $k+1$
+		\item IF $c(0) \neq 0$ THEN GOTO 6	 (Wenn $c(1) = 0$ ist, sind wir mit der Multiplikation fertig)
+		\item LOAD $k$
+		\item END
+		\item CSUB 1
+		\item STORE $k+1$ 
+		\item LOAD $k+2$	(Reset der kleinen Schleife)
+		\item STORE $k+3$
+		\item LOAD $k+3$
+		\item IF $c(0) \neq 0$ THEN GOTO 16	(Wenn $c(k+3) = 0$ ist, sind wir mit der kleinen Schleife fertig)
+		\item GOTO 5
+		\item CSUB 1
+		\item STORE $k+3$
+		\item LOAD $k$
+		\item CADD 1
+		\item STORE $k$
+		\item GOTO 13
+	\end{enumerate}
+	
 	\item INDLOAD $i$
+	INDLOAD: $c(0) := c(c(i))$
+	\begin{enumerate}[ 1.]
+		\item LOAD $i$
+		\item IF $c(0) \neq 0$ GOTO 5
+		\item LOAD 0
+		\item END
+		\item CSUB 1
+		\item IF $c(0) \neq 0$ GOTO 9
+		\item LOAD 1
+		\item END
+		\item CSUB
+		\item IF $c(0) \neq 0$ GOTO 11
+		\item LOAD 2
+		\item END\\
+		...
+	\end{enumerate}
+	\begin{enumerate}[j+1]
+		\item CSUB
+		\item IF $c(0) \neq 0$ GOTO j$+5$
+		\item LOAD $k-1$
+		\item END
+		\item CSUB
+		\item LOAD k
+		\item END
+	\end{enumerate}
 \end{enumerate}
+
 \subsection*{Aufgabe 7.2}
 \begin{enumerate}[(a)]
-	\item Ist das Problem, ob ein gegebenes LOOP-Programm zu einer Eingabe $x$ die Ausgabe $y$ berechnet, entscheidbar? Begründen Sie die Antwort.
+	\item Ist das Problem, ob ein gegebenes LOOP-Programm zu einer Eingabe $x$ die Ausgabe $y$ berechnet, entscheidbar? Begründen Sie die Antwort.\\
+	Per Definition terminiert ein LOOP-Programm immer. Darum kann das Programm mit der Eingabe $x$ einfach laufen lassen und das Ergebnis mit $y$ vergleichen. Das Problem ist somit entscheidbar.
 	\item Ist das Problem, ob ein gegebenes WHILE-Programm zu einer Eingabe $x$ die Ausgabe $y$ berechnet eintscheidbar? Begründen Sie die Antwort.
 \end{enumerate}
 \subsection*{Aufgabe 7.3}
