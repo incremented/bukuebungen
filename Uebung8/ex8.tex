@@ -1,0 +1,124 @@
+\section*{8. Übung}
+\subsection*{Aufgabe 8.1}
+
+a)\\
+Wir konstruieren eine NDTM $M$ welche wie folgt arbeitet:\\
+\begin{enumerate}
+
+\item Checke die Syntax der Eingabe, wenn fehlerhaft verwirf
+\item Laufe von links nach rechts über $v$ und zähle mit einem Zähler auf einer separaten Spur
+die Schritte. Speichere $v_i$ im aktuellen Zustannd, gehe nicht deterministisch in Zustand 4 oder laufe weiter
+\item Laufe mit Hilfe des Zählers von der $\#$ bis $w_i$. Überprüfe folgendes:
+
+    \begin{enumerate}
+
+        \item $v_i \not= \#$, $w_i \not= B$ und $v_i \not=w_i$ $\Rightarrow$ akzeptiere
+        \item $v_i = \#$, $w_i \not= B$ $\Rightarrow$ akzeptiere
+        \item $v_i \not=$, $w_i=B$ $\Rightarrow$ akzeptiere
+    \end{enumerate}
+
+\end{enumerate}
+
+Bezüglich der Laufzeit:\\
+Damit die Laufzeit nicht in $O(n^2)$ ist, müssen wir den Zähler auf der 2. Spur bei jedem Schritt mitziehen.
+Dies kostet uns pro Schritt $O(log(n))$\\
+Daher ergibt sich die Gesamtlaufzeit von $O(n \cdot log(n))$\\
+
+b)\\
+Nein, da wir für Zugehörigkeit in $L'$ jede Position überpfüfen müssen.
+
+\newpage
+\subsection*{Aufgabe 8.2}
+
+a)\\
+Graph 1:\\
+Ist 2-Färbbar, da eine Abbildung c wie folgt existiert:\\
+
+ \[
+     c: V \rightarrow \{1,2\}, c(v)=\left\{\begin{array}{ll} 1, & $für$ \:v1, v2, v5, v7 \\
+         2, & $für$ \: v3, v4, v6\end{array}\right. .
+  \]
+
+Graph2:\\
+Graph 2 ist nicht 2-Färbbar, da er einen Zykel ungerader Länge enthält und somit immer 2
+gleich gefärbte Knoten nebeneinander liegen.\\
+
+b)\\
+Idee:\\
+Suche nach Zyklen ungerader Länge im Graph. Existiert solch ein Zyklus, ist der Graph
+nicht 2-Färbbar. Da ein Graph genau dann bipartit ist, wenn er keinen solchen Zykel
+enthält, reicht es einen Algorithmus anzugeben, der die Bipartitheit eines
+Graphen entscheidet. Wir nutzen hierfür eine leichte Abwandlung der Tiefensuche wie folgt:\\
+
+Algorithmus:  2 leere Mengen $V_{1} = V_{2} = \varnothing$\\
+Führe Tiefensuche auf Knoten $v$ aus.
+\begin{enumerate}
+\item Ordne $v$ der Menge $V_1$ zu
+\item Ordne jedem Nachbarknoten alle Knoten aus $V_1$ der Menge $V_2$ zu und umgekehrt, sofern
+diese noch nicht besucht wurden.
+\item Ist ein Knoten $v$ nun einer Menge zugeordnet und es wir festgestellt, dass ein 
+Nachbarknoten von $v$ bereits besucht ist und ebenfalls in der gleichen Menge wie $v$ ist,
+Verwerfe!
+\item Wurde kein solch obiger Konflikt gefunden, ist der Graph bipartit, also auch 2-Färbbar.
+\end{enumerate}
+
+Korrektheit:\\
+
+Fall1 G ist bipartit:\\
+Ordne ersten Knoten $v$ der Menge $V_1$ zu und verfahre nach dem Schema der Tiefensuche
+für alle Knoten, so dass die Nachbarknoten immer der jeweils anderen Menge ($V_1$ oder $V_2$)
+des Vaterknoten zugeordnet werden, sofern sie nicht besucht wurden.\\
+$\Rightarrow$ Da G bipartit ist, bekommt jeder Knoten eine vom Vaterknoten verschiedene Menge zugewiesen.\\
+$\Rightarrow$ Der Algorithmus gibt aus G ist bipartit\\
+$\Rightarrow$ G ist 2-Färbbar\\
+
+Fall2 G ist nicht bipartit:\\
+$\Rightarrow$ Ordne den ersten Knoten $V_1$ zu\\
+$\Rightarrow$ Verfahre nach dem Schema der Tiefensuche\\
+$\Rightarrow$ Nach $n-1$ korrekten Zuweisungen, wird die in Schritt 3) aufgestellte\\
+Bedingung für den $n-ten$ Knoten, nach dess Besuch verletzt.\\
+$\Rightarrow$ Es existier eine Kante zwischen 2 Knoten in der gleichen Menge\\
+$\Rightarrow$ Der ist nicht bipartit\\
+$\Rightarrow$ G ist nicht 2-Färbbar\\
+
+Zu zeigen: 2-Colorability liegt in P\\
+Der Algorithmus beruht auf der normalen Tiefensuche. Die zusätzlichen Schritte benötigen alle
+eine konstante Laufzeit. Die Gesamtlaufzeit erschliesst sich also aus der Menge aller Knoten
+und Kanten des Graphen und liegt bei $O(|V| + |E|)$
+
+\subsection*{Aufgabe 8.3}
+
+Zu zeigen: 3-Colorability liegt in NP\\
+
+Beweis:\\
+Wir beschreiben eine NDTM $M$ mit $L(M)=$ 3-Colorability. $M$ arbeitet wie folgt:\\
+\begin{enumerate}
+\item Falls die Eingabe kein Graph/Adjazenzmatrix ist verwerfe
+\item Sei $G=(V,E)$. Sei $n$ die Anzahl der Knoten, so dass $V = \{1,...,n\}$. 
+$M$ schreibt hinter die Eingabe den String $\#^{n}$. Der Kopf bewegt sich unter das erste $\#$
+\item (nicht deterministisch) $M$ läuft von links nach rechts über den String $\#^{n}$ und 
+ersetzt ihn nicht-deterministisch durch einen String aus $\{1, 2, 3\}^{n}$
+(Jeder Knoten bekommt eine Farbe zugewiesen)
+\item Prüfe für alle Kanten $e \in E$, ob die 3-Colorability Eigenschaft gilt und 
+akzeptiere entsprechend.
+\end{enumerate}
+
+Wir zeigen $L(M)=$ 3-Colorability:\\
+Sei die Eingabe ein gültiger Graph G und sei $G \in $ 3-Colorability.
+In diesem Fall gibt es mindestens eine Farbkombination welche in Schritt 4 akzeptiert wird.\\
+Falls die Eingabe also in 3-Colorability enthalten ist, gibt es einen akzeptierenden
+Rechenweg polynomiell beschränkter Länge.\\
+Falls die Eingabe nicht in 3-Colorability enthalten ist, gibt es auch keinen
+akzeptierenden Rechenweg.\\
+
+Fazit:\\
+$M$ erkennt die Sprache 3-Colorability und hat eine polynomiell beschränkte Worst-Case-Laufzeit\\
+$\Rightarrow$ 3-Colorability $\in$ NP
+
+
+\subsection*{Aufgabe 8.4}
+
+
+
+
+
