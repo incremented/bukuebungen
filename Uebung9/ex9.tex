@@ -1,0 +1,23 @@
+\section*{9. Übung}
+\subsection*{Aufgabe 9.1}
+Zeigen Sie, jeweils mit Hilfe eines Polynomialzeitverifizierers, dass die folgenden Entscheidungsprobleme in NP sind. Beschreiben Sie dazu im Detail die Kodierung und die Länge das Zertifikats sowie die Arbeitsweise und die Laufzeit des Verifizierers (eine Beschreibung ähnlich zu Folie 418 ist \textbf{nicht} hinreichend detailliert)
+\begin{enumerate}[(a)]
+	\item $\textsc{MaxSpanTree} = \{ (G,c) \mid c \in \mathbb{N} $ und $G $ ist ein Graph mit gewichteten Kanten und hat einen Spannbaum mit Kosten $ \geq c \}$
+	\item $\textsc{Composite} = \{ w \in \{0,1\}^* \mid w $ ist die binäre Kodierung einer Zahl $k \in \mathbb{N} $ und $k$ ist keine Primzahl$ \}$
+	\item $\textsc{Graphisomorphie} = \{ G_1 \# G_2 \mid G_1, G_2 \text{ sind Graphen, }G_1 \text{ ist isomorph }G_2 \}$\\
+	Zwei Graphen $G_1 = (V_1, E_1)$ und $G_2 = (V_2, E_2)$ sind isomorph, falls es eine bijektive Abbildung $f: V_1 \rightarrow V_2$ gibt, so dass $(v_i, v_j) \in E_1 \Leftrightarrow (f(v_i)), f(v_j)) \in E_2$ für alle $v_i, v_j \in V$ gilt.
+\end{enumerate}
+\subsection*{Aufgabe 9.2}
+Seien BPP und TSP die in der Vorlesung vorgestellten Optimierungsprobleme. Zeigen Sie die folgenden Aussagen:
+\begin{enumerate}[(a)]
+	\item Falls BPP-E in P ist, so kann auch BPP in polynomieller Zeit gelöst werden.
+	\item Falls TSP-E in P ist, so kann auch TSP in polynomieller Zeit gelöst werden.
+\end{enumerate}
+\subsection*{Aufgabe 9.3}
+Betrachten Sie folgendes Entscheidungsproblem:
+\begin{framed}
+	\textsc{DoubleSat}\\
+	\textbf{Eingabe:} Eine aussagenlogische Formel $\varphi$ in KNF.\\
+	\textbf{Ausgabe:} Ja gdw. es mindestens \textbf{zwei} erfüllende Belegungen für $\varphi$ gibt.
+\end{framed}
+Zeigen Sie, dass \textsc{DoubleSat} NP-vollständig ist.
