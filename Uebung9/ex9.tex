@@ -50,7 +50,7 @@ Zeigen Sie, jeweils mit Hilfe eines Polynomialzeitverifizierers, dass die folgen
 	Schlussendlich wird überprüft, ob alle Kanten des modifizierten Graphen auch in $E_2$ liegen (und umgekehrt), indem wir für jede Kante die modifizierte Eingabe durchlaufen (in $\mathcal{O}(|E|^2\cdot| \text{Eingabe}|\cdot \text{log }|V|)$)\\
 	Da alle Schritte in polynomieller Zeit (nach Eingabelänge) erfolgen gilt die Behauptung.
 	
-	
+\newpage
 	
 \end{enumerate}
 \subsection*{Aufgabe 9.2}
@@ -59,6 +59,49 @@ Seien BPP und TSP die in der Vorlesung vorgestellten Optimierungsprobleme. Zeige
 	\item Falls BPP-E in P ist, so kann auch BPP in polynomieller Zeit gelöst werden.
 	\item Falls TSP-E in P ist, so kann auch TSP in polynomieller Zeit gelöst werden.
 \end{enumerate}
+
+a)\\
+Angenommen die Entscheidungsvariante des BPP $EV \in P$, dann existiert ein Algorithmus $A_{ENT}$, der
+EV in P entscheidet. Wir beschreiben nun einen Algorithmus welcher mithilfe von $A_{ENT}$ das BPP löst.
+\begin{enumerate}
+
+	\item Finde durch Binärsuche die optimale Anzahl an Behältern $b_{Opt}$. Dies ist möglich, da $A_{ENT}$
+		existiert und man sich sukzessiv an den optimalen Wert annähern kann. Laufzeit: $O(log(n))$
+	\item Finde die Aufteilung auf die Behälter
+	\begin{enumerate}
+		\item Iteriere über alle Paare $(x,y)$ von Objekten
+		\item "klebe" $x$ und $y$ zusammen und prüfe mit $A_{ENT}$ ob immer noch eine Verteilung
+			auf $b_{Opt}$ exisitiert
+		\item Falls ja: lasse x und y zusammen und rufe diesen Algorithmus hier rekursiv auf mit den
+			zusammengeklebten Objekten, solange bis die Anzahl aller Objekte $= b_{Opt}$\\
+			Falls nein: wähle nächstes Paar
+	\end{enumerate}
+\end{enumerate}
+
+Laufzeit:\\
+Pro Schritt des Algorithmus wird die Anzahl der Objekte um eins reduziert. Es entstehen $n - b_{Opt}$
+Rekursionen. Pro Schritt haben wir höchstens $n^2$ viele Aufrufe $\Rightarrow$ Der Algorithmus ist in P \\
+
+b)\\
+Angenommen die Entscheidungsvariante $EV$ des TSP ist in P, dann existiert ein Algorithmus $A_{ENT}$,
+der $EV$ in polynomialzeit entscheidet. Wir beschrieben nun einen Algorithmus welcher mithilfe von $A_{ENT}$
+das TSP löst.
+\begin{enumerate}
+	\item Eingabe ist ein Graph $G(V,E)$
+	\item Bestimme zunächst wieder $k_{Opt}$
+	\item Der Algorithmus läuft über die Eingabe und löscht eine Kante $e \in E$ und prüft mittels
+		$A_{ENT}$, ob es eine optimale Tour der Länge $k_{Opt}$ gibt.
+		\begin{enumerate}
+			\item Falls Ja: Wähle eine neue Kante $e' \in E$ mit $e' \not= e$ und beginne von vorne
+			\item Falls Nein: Die Kante is notwendig für jede optimale Tour. Mache das Löschen dieser
+				Kante rückgängig und wähle eine andere.
+		\end{enumerate}
+\end{enumerate}
+
+Laufzeit:\\
+Es wird genau einmal über jede Kante iteriert. Da die Entscheidungsvariante polynomiell lösbar ist bleiben 
+wir auch mit diesem Algorithmus in einer polynomiellen Laufzeit.
+
 \subsection*{Aufgabe 9.3}
 Betrachten Sie folgendes Entscheidungsproblem:
 \begin{framed}
