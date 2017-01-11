@@ -1,7 +1,42 @@
 %!TEX root = main.tex
 \section*{9. Übung}
 \subsection*{Aufgabe 10.1}
+a) Entscheidungsvariante:\\
+Einagbe: $m$ Maschinen, $n$ Job mit Laufzeiten $p_1,...,p_n$, und $k \in \mathbb{N}$\\
+Ausgabe: Existiert ein Schedule mit einem Makespan $\le k$?\\
 
+b)\\
+Zu zeigen SUBSETSUM $\le_p$ $MAKESPANSCHEDULING_{ENT}$\\
+Wir beschreiben eine Funktion f wie folgt:
+
+\begin{itemize}
+	\item Falls x nicht der Form $a_1,...,a_n \in \mathbb{N}$, $b \in \mathbb{N}$ ist, so ist $f(x) = 0$.
+	\item Kreiere als Eingabe für $MAKESPANSCHEDULING_{ENT}$ n Jobs mit Laufzeit $p_i = a_i$.
+	\item Um die Jobs einfach aufteilen zu können setzen wir die Anzahl der Maschinen für $MAKESPANSCHEDULING_{ENT}$ auf 2.
+	\item Um zu garantieren, dass die Gesamtlaufzeit aller Jobs durch 2 teilbar ist kreieren wir nun 2 weitere Jobs $p_{n+1}$ und 
+		$p_{n+2}$ wobei $p_{n+1}$ die Laufzeit $2S - b$ hat und $p_{n+2}$ die Laufzeit $S + b$ wobei $S = \sum_{i=1}^{n} a_i$.
+	\item Als letztes setzen wir noch den geforderten MakeSpan auf $2*S$, da wir garantieren können, dass es immer eine Aufteilung
+		auf die 2 Maschinen gibt, so dass der MakeSpan erfüllt wird. (Hierzu mehr in der Korrektheit)
+\end{itemize}
+Die Funktion ist polynomiell berechenbar, da lediglich die Summe $S$ berechnet werden muss sowie die 2 zusätzlichen Jobs.\\
+
+Korrektheit: Sei $x \in \Sigma^{*}$
+
+\begin{itemize}
+	\item Wenn $x$ ist nicht der Form $a_1,...,a_n \in \mathbb{N}$, $b \in \mathbb{N}$ ist $\Rightarrow$ $f(x) = 0$ $\Rightarrow$ 
+		$f(x) \not\in $ $MAKESPANSCHEDULING_{ENT}$
+	\item Fall 1: Sei $x = a_1,...,a_n,b \in$ SUBSETSUM $\Rightarrow$ kreiere die Jobs $p_i$ für $i \in \{1,...,n+2\}$
+	\item Wir machen uns nun die Eigenschaft zu nutze, dass die Summe einer Teilmenge $A'$ von $\{a_1,...,a_n\}$ gleich $b$ ist.
+		Wir teilen nun jeden Job $p_i$ für $i \in \{1,...,n\}$ der Maschine $1$ zu, wenn $p_i \in A'$. Ansonsten wird $p_i$ Maschine $2$ zugeordnet.
+	\item Es bleiben noch die Jobs $p_{n+1}$ und $p_{n+2}$. Wir ordnen $p_{n+1}$ Maschine $1$ zu. Maschine $1$ hat also die Laufzeit
+		$2*S - b + \sum_{i \in A'} p_i$ was genau $2*S$ ist. Es bleibt noch $p_{n+2}$ welchen wir Maschine $2$ zuordnen. 
+		Die Laufzeit hier berechnet sich wie folt: $S + b + \sum_{i \in A \setminus A'}p_i$ was ebenfalls $2*S$ ist.
+	\item $f(x) \in $ $MAKESPANSCHEDULING_{ENT}$
+	\item Fall 2: Sei $x = a_1,...,a_n,b \not\in$ SUBSETSUM $\Rightarrow$ kriere die $n+2$ jobs.
+	\item Es existiert keine Menge $A'$ deren Summe gleich $b$ ist. $\Rightarrow$ Auf Grund unserer Konstruktion der Laufzeiten von
+		$p_{n+1}$ und $p_{n+2}$ existiert kein Schedule der genau den geforderten MakeSpan hat.
+	\item $\Rightarrow$ $f(x) \not\in$ $MAKESPANSCHEDULING_{ENT}$
+\end{itemize}
 
 \newpage
 \subsection*{Aufgabe 10.2}
