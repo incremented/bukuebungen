@@ -1,0 +1,56 @@
+%!TEX root = main.tex
+\section*{9. Übung}
+\subsection*{Aufgabe 10.1}
+
+
+\newpage
+\subsection*{Aufgabe 10.2}
+Zu zeigen 3-Partition is NP-vollständig.\\
+
+Wir zeigen PARTITION $\le_p$ 3-PARTITION\\
+
+Wir beschreiben eine Funktion f wie folgt:
+
+\begin{enumerate}
+	\item $f(x) = x$ gdw. x nicht die Form $\{a_1, ..., a_n\} \in \mathbb{N}$ hat.
+	\item Ist $x = \{a_1, ..., a_n\} \in \mathbb{N}$, dann: $f(x) = x' = x \cup \{\lceil\frac{A}{2}\rceil\}$ wobei $A = \sum_{i=1}^{n}{a_i}$
+\end{enumerate}
+
+Die Funktion is offensichtlich in polynomieller Zeit berechenbar, da wir lediglich einmal über die Eingabe iterieren müssen um 
+die Summe zu bilden.\\
+
+Korrektheit: Sei $x \in \Sigma^{*}$
+\begin{itemize}
+	\item $x$ ist nicht der Form $\{a_1,...,a_n\} \in \mathbb{N}$, dann ist auch $f(x)$ nicht dieser Form $\Rightarrow$ $f(x) \not\in $
+		3-PARTITION.
+	\item Fall 1: $x = \{a_1,...,a_n\} \in \mathbb{N}$, und $x \in $ PARTITION $\Rightarrow$\\
+		 $\exists k \subseteq \{1,...,n\}$ mit $\sum_{i \in k} a_i = \sum_{i \in \{1,...,n\} \setminus k} a_i$ 
+		 und die Menge $f(x) = x'$ ist deswegen 3-Partitionierbar, da wir
+		$\{\frac{A}{2}\}$ zu $x$ hinzufügen. $\Rightarrow$ $f(x) \in$ 3-PARTITION
+	\item Fall 2: Sei $x \not\in$ PARTITION $\Rightarrow$ Es existiert keine Menge $k \subseteq \{1,...,n\}$
+		mit $\sum_{i \in k} a_i = \sum_{i \in \{1,...,n\} \setminus k} a_i$ $\Rightarrow$ Die Menge $f(x) = x'$ enthält bereits 
+		$\{\frac{A}{2}\}$. Da $\{\frac{A}{2}\}$ als einziges Objekt einer Partition zugeordnet werden muss, (Auf Grund seiner Grösse),
+		muss die Menge $x' \setminus \{\frac{A}{2}\} \in $ PARTITION sein. Dies ist ein Widerspruch zur Annahme oben.
+\end{itemize}
+Damit ist die Korrektheit für jede Eingabe gezeigt.\\
+Es bleibt zu zeigen, dass 3-PARTITION $\in NP$.\\
+
+Zertifikat:\\
+Ein Zertifikat $y$ wäre ein Wort $y \in \{0, 1\}^k$ der Form $(t_{11},...,t_{1n}), (t_{21},...,t_{2n}), (t_{31},...,t_{3n})$ wobei
+$t_{1i} = 1 \Leftrightarrow a_i \in I$, $t_{2i} = 1 \Leftrightarrow a_i \in J$, und $t_{3i} = 1 \Leftrightarrow a_i \in K$. (Codierung einer 3-Partition für die Eingabe $x = \{x = (a_1,...,a_n)\}$)\\
+
+Verifizierer:
+\begin{enumerate}
+	\item Falls $y$ nicht in der obigen Form vorliegt verwirf.
+	\item Überprüfe ob $\sum_{i = 0}^{n} t_{1i} = \sum_{i=0}^{n} t_{2i} = \sum_{i=0}^{n} t_{3i}$. Falls nein, verwirf. Ansonsten 
+	akzeptiere.
+\end{enumerate}
+
+$\Rightarrow$ Die Gesamtlaufzeit ist polynomiell\\
+$\Rightarrow$ 3-PARTITION $\in$ NP\\
+$\Rightarrow$ 3-PARTITION ist NP-hard.\\
+
+$\Rightarrow$ 3-PARTITION ist NP-Vollständig
+
+
+\subsection*{Aufgabe 10.3}

@@ -1,0 +1,97 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{bbm}
+\usepackage{enumerate}
+\usepackage{fancyhdr}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{listings}
+\usepackage{stmaryrd}
+\usepackage{verbatim}
+\usepackage{xcolor}
+\usepackage{framed}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%% EDIT THIS PART %%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\Fach}{Berechenbarkeit und Komplexität}
+\newcommand{\Name}{Simon Wagner}
+\newcommand{\NameZwei}{Timotheus Jochum}
+\newcommand{\Seminargruppe}{16}
+\newcommand{\Matrikelnummer}{343756}
+\newcommand{\MatrikelnummerZwei}{304222}
+\newcommand{\Semester}{WS 16/17}
+\newcommand{\Uebungsblatt}{10} %  <-- UPDATE ME
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\setlength{\parindent}{0em}
+\topmargin -1.0cm
+\oddsidemargin 0cm
+\evensidemargin 0cm
+\setlength{\textheight}{9.2in}
+\setlength{\textwidth}{6.0in}
+
+%%%%%%%%%%%%%%%
+%% Aufgaben-COMMAND
+\newcommand{\Aufgabe}[1]{
+  {
+  \vspace*{0.2cm}
+  \textsf{\textbf{Exercise #1}}
+  \vspace*{0.2cm}
+  
+  }
+}
+%%%%%%%%%%%%%%
+\hypersetup{
+    pdftitle={\Fach{}: Übungsblatt \Uebungsblatt{}},
+    %pdfauthor={\Name},
+    pdfborder={0 0 0}
+}
+
+\lstset{ %
+	%language=java,
+	basicstyle=\footnotesize\tt,
+	showtabs=false,
+	tabsize=2,
+	captionpos=b,
+	breaklines=true,
+	extendedchars=true,
+	showstringspaces=false,
+	flexiblecolumns=true,
+	keywordstyle=\bfseries\ttfamily\color{orange},
+	stringstyle=\color{green}\ttfamily,
+	%backgroundcolor=\color{lightgray},
+	emph=square,
+	emphstyle=\color{blue}\texttt,
+	basicstyle=\ttfamily\color{blue},
+}
+
+
+\title{Übungsblatt \Uebungsblatt{}}
+%\author{\Name{}}
+
+\begin{document}
+\maketitle
+\thispagestyle{fancy}
+\fancyhf{}
+%\renewcommand{\headrulewidth}{0pt} % remove lines as well
+%\renewcommand{\footrulewidth}{0pt}
+\lhead{\sf \Semester{} \\  Gruppe \large \text \Seminargruppe{} \\ ~\\ }
+\rhead{\sf \large \Fach{} \\ \small \Name{} - \Matrikelnummer{} \\ \small \NameZwei{} - \MatrikelnummerZwei{}}
+\vspace*{0.2cm}
+\begin{comment}
+	\begin{center}
+	\LARGE \sf \textbf{Ãœbung \Uebungsblatt{}}
+	\end{center}
+\end{comment}
+%\vspace*{0.2cm}
+
+%\begin{document}
+\input{ex\Uebungsblatt} %using input instead of include!
+
+\end{document}
